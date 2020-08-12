@@ -4,16 +4,19 @@ import socket
 serverHost = '192.168.0.104'
 serverPort = 50007
 
-mensagem = [b'b']
+while True:
+  msg = input('Digite o comando: ')
 
-sockobj = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sockobj.connect((serverHost, serverPort))
+  mensagem = [str.encode(msg)]
 
-for linha in mensagem:
-  sockobj.send(linha)
+  sockobj = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  sockobj.connect((serverHost, serverPort))
 
-  data = sockobj.recv(1024)
-  print('Cliente recebeu: ', data)
+  for linha in mensagem:
+    sockobj.send(linha)
 
-sockobj.close
+    data = sockobj.recv(1024)
+    print('Cliente recebeu: ', data)
+
+  sockobj.close
 

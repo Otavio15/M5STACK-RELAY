@@ -6,6 +6,10 @@ import network
 import wifiCfg
 import usocket as socket
 
+wifiCfg.doConnect('Pardal', 'brp79501')
+wait_ms(2000)
+
+
 lcd.setRotation(2)
 
 setScreenColor(0x000000)
@@ -24,38 +28,54 @@ triangle1 = M5Triangle(128, 211, 97, 162, 158, 162, 0xFFFFFF, 0xFFFFFF)
 label0 = M5TextBox(42, 240, "tecpy.com.br", lcd.FONT_DejaVu24,0xFFFFFF, rotate=0)
 triangle0 = M5Triangle(126, 34, 96, 85, 156, 85, 0xFFFFFF, 0xFFFFFF)
 
-def buttonA_wasPressed():
-  # global params
+def auxBtnA():
   triangle0.setBgColor(0x33ff33)
   circle0.setBgColor(0xffffff)
   triangle1.setBgColor(0xffffff)
   relay1.value(1)
   relay2.value(0)
-  speaker.tone(1800, 200)
+  pass
+
+
+def buttonA_wasPressed():
+  auxBtnA()
   pass
 btnA.wasPressed(buttonA_wasPressed)
 
-def buttonB_wasPressed():
-  # global params
+
+
+
+def auxBtnB():
   triangle0.setBgColor(0xffffff)
   circle0.setBgColor(0x33ff33)
   triangle1.setBgColor(0xffffff)
   relay1.value(1)
   relay2.value(1)
-  speaker.tone(1800, 200)
+  pass
+
+
+def buttonB_wasPressed():
+  auxBtnB()
   pass
 btnB.wasPressed(buttonB_wasPressed)
 
-def buttonC_wasPressed():
-  # global params
+
+
+
+def auxBtnC():
   triangle0.setBgColor(0xffffff)
   circle0.setBgColor(0xffffff)
   triangle1.setBgColor(0x33ff33)
   relay1.value(0)
   relay2.value(1)
-  speaker.tone(1800, 200)
+  pass
+
+def buttonC_wasPressed():
+  auxBtnC()
   pass
 btnC.wasPressed(buttonC_wasPressed)
+
+
 
 
 triangle0.setBgColor(0xffffff)
@@ -65,7 +85,6 @@ triangle1.setBorderColor(0xff0000)
 circle0.setBgColor(0x33ff33)
 circle0.setBorderColor(0xff0000)
 
-wifiCfg.doConnect('Pardal', 'brp79501')
 
 meu_host = '0.0.0.0'
 minha_porta = 50007
@@ -88,21 +107,21 @@ while True:
       
       if (b''+data == b'a'):
         conexao.send(b'A')
-        # RELAY 1 ON
-        # RELAY 2 OFF
+        auxBtnA()
+        wait_ms(1000)
         pass
       elif (b''+data == b'b'):
         conexao.send(b'B')
-        # RELAY 1 OFF
-        # RELAY 2 OFF
+        auxBtnB()
+        wait_ms(1000)
         pass
       elif (b''+data == b'c'):
         conexao.send(b'C')
-        # RELAY 1 OFF
-        # RELAY 2 ON
+        auxBtnC()
+        wait_ms(1000)
         pass
       else:
-        conexao.send(b'D'+data)
+        conexao.send(b'CU'+data)
         
     conexao.close()
       
@@ -115,3 +134,5 @@ while True:
   
   
   
+
+
