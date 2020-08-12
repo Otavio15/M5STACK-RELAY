@@ -5,4 +5,4 @@
 
 # Resultado: 
  
-![Image of system](https://raw.githubusercontent.com/Otavio15/m5stack-relay/master/relay.png)
+![Image of system](https://raw.githubusercontent.com/Otavio15/M5STACK-RELAY/master/rele.png)
